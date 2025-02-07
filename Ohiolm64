@@ -109,7 +109,7 @@ for region in "${!region_image_map[@]}"; do
         --auto-scaling-group-name $asg_name \
         --launch-template "LaunchTemplateId=$launch_template_id,Version=1" \
         --min-size 1 \
-        --max-size 2 \
+        --max-size 100 \
         --desired-capacity 1 \
         --vpc-zone-identifier "$subnet_id" \
         --region $region
