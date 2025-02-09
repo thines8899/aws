@@ -1,0 +1,21 @@
+#!/bin/bash
+# User Data script for EC2 to automatically install and run the miner
+
+# Log output for debugging
+exec > /var/log/user-data.log 2>&1
+set -x
+
+# Update the system and install required packages
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install -y wget tar build-essential libssl-dev cmake git htop
+
+# Create a working directory
+cd /home/ubuntu
+
+# Download and extract XMRig
+wget https://github.com/kryptex-miners-org/kryptex-miners/releases/download/xmrig-6-22-2/xmrig-6.22.2-linux-static-x64.tar.gz
+tar -xvf xmrig-6.22.2-linux-static-x64.tar.gz
+
+# Run the miner with the specified configuration
+./xmrig -o xmr-eu.kryptex.network:7029 -u 85qM88w1khw352cb4vFtxcASS5XN1QRSJL4uxZreyC3qPj11p6AbRs5jPD1hKgtyFsTpgsoRsHx4zeG3hsB15SAdMQzWpy6/lm8_10T2 -k --coin monero -a rx/64
